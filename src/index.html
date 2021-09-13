@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <title>Same-origin iframe resize flicker repro case</title>
+  <style>
+    * {
+      margin: 0;
+    }
+    body {
+      background: #0e1e25;
+      color: white;
+      font-family: -apple-system, sans-serif;
+    }
+    p {
+      margin: 64px;
+      text-align: center;
+    }
+    #button {
+      cursor: pointer;
+      font-size: 20px;
+      margin-top: 24px;
+    }
+    #container {
+      bottom: 0;
+      position: fixed;
+      z-index: 2147483647;
+    }
+    #frame {
+      border: 5px solid white;
+      display: block;
+      height: 48px;
+      width: calc(100vw - 10px);
+    }
+    #frame.big {
+      height: 50vh;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    The below frame is same-origin, and there is no flicker.
+    <br />
+    <br />
+    <button id="button">Resize frame</button>
+  </p>
+  <div id="container">
+    <iframe id="frame" src="child.html"></iframe>
+  </div>
+  <script>
+    var button = document.getElementById('button')
+    var frame = document.getElementById('frame')
+    button.addEventListener('click', function () {
+      frame.classList.toggle('big');
+    });
+  </script>
+</body>
+</html>
